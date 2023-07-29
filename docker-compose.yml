@@ -1,0 +1,49 @@
+version: '3.8'
+
+services:
+  # Servicio para el servidor de Node.js
+  gateway:
+    container_name: gateway
+    restart: always
+    build:
+      context: ./gateway # Ruta al directorio donde se encuentra el código fuente del servidor de Node.js
+      dockerfile: Dockerfile # Nombre del archivo Dockerfile para el servidor de Node.js
+    #image: node-films:18 # Nombre personalizado para la imagen
+    ports:
+      - "8000:8000" # Mapeo del puerto del contenedor al puerto del host
+
+  characters:
+    container_name: characters
+    restart: always
+    build:
+      context: ./characters
+      dockerfile: Dockerfile
+    ports:
+      - "8001:8001"
+
+  films:
+    container_name: films
+    restart: always
+    build:
+      context: ./films
+      dockerfile: Dockerfile
+    ports:
+      - "8002:8002"
+
+  planets:
+    container_name: planets
+    restart: always
+    build:
+      context: ./planets
+      dockerfile: Dockerfile
+    ports:
+      - "8003:8003"
+
+  database:
+    container_name: database
+    restart: always
+    build:
+      context: ./database
+      dockerfile: Dockerfile
+    ports:
+      - "8004:8004"
